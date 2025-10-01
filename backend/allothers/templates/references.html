@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>References</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+  <div class="container mx-auto my-8 p-6 bg-white shadow-lg rounded-lg">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4 text-center">References</h2>
+
+    <!-- References List -->
+    <div class="space-y-4 text-gray-700 text-md leading-relaxed">
+      {% for reference in references %}
+        <div>
+          {{ reference | safe }}
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="flex justify-center items-center mt-6 space-x-2">
+      <!-- First and Previous -->
+      {% if page > 1 %}
+        <a href="?page=1" class="px-3 py-1 bg-gray-300 text-gray-800 rounded hover:bg-gray-400">« First</a>
+        <a href="?page={{ page - 1 }}" class="px-3 py-1 bg-gray-300 text-gray-800 rounded hover:bg-gray-400">‹ Previous</a>
+      {% endif %}
+
+      <!-- Page Numbers -->
+      {% for num in range(page - 3, page + 4) %}
+        {% if num > 0 and num <= total_pages %}
+          {% if num == page %}
+            <span class="px-3 py-1 bg-blue-500 text-white rounded">{{ num }}</span>
+          {% else %}
+            <a href="?page={{ num }}" class="px-3 py-1 bg-gray-300 text-gray-800 rounded hover:bg-gray-400">{{ num }}</a>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+
+      <!-- Next and Last -->
+      {% if page < total_pages %}
+        <a href="?page={{ page + 1 }}" class="px-3 py-1 bg-gray-300 text-gray-800 rounded hover:bg-gray-400">Next ›</a>
+        <a href="?page={{ total_pages }}" class="px-3 py-1 bg-gray-300 text-gray-800 rounded hover:bg-gray-400">Last »</a>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>

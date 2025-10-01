@@ -1,0 +1,84 @@
+services:
+  # Main Flask App (Themes & References)
+  - type: web
+    name: rs-review-main
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: cd backend/allothers && python app.py
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: RENDER
+        value: true
+
+  # Interactive App 1 (Years & Countries)
+  - type: web
+    name: rs-review-interactive1
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: cd backend/interactiveApp && python app.py
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: RENDER
+        value: true
+
+  # Interactive App 2 (Years, Segments & Countries)
+  - type: web
+    name: rs-review-interactive2
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: cd backend/interactiveApp2 && python app.py
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: RENDER
+        value: true
+
+  # Segment Country App (Segments & Countries)
+  - type: web
+    name: rs-review-segmentcountry
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: cd backend/segmentcountry && python app.py
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: RENDER
+        value: true
+
+  # Segment Year App (Years & Segments)
+  - type: web
+    name: rs-review-segmentyear
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: cd backend/segmentyear && python app.py
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: RENDER
+        value: true
+
+  # Continents Countries App
+  - type: web
+    name: rs-review-continents
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: cd backend/continentsCountries && python app.py
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: RENDER
+        value: true
+
+  # Static Frontend
+  - type: static
+    name: rs-review-frontend
+    staticPublishPath: frontend
+    buildCommand: python update_urls_for_production.py

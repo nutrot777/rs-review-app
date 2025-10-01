@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publication by Years, Dimensions & Countries</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Navigation Styles */
+    .nav-button {
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+    
+    .nav-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    #iframe-container {
+      position: relative;
+      width: 100%;
+      height: 100vh; /* Full viewport height */
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: none; /* Initially hide the iframe */
+    }
+
+    #loader {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+      z-index: 10; /* Ensure loader is above everything else */
+    }
+
+    .spinner {
+      border: 4px solid rgba(0, 0, 0, 0.1); /* Light border */
+      border-top: 4px solid #3498db; /* Blue border for animation */
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loading-text {
+      margin-top: 0.5rem; /* Small space under spinner */
+      font-size: 1rem;
+      color: #4a5568; /* Gray color */
+      text-align: center; /* Center the text */
+    }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans">
+  <header class="bg-white shadow-md py-4">
+    <div class="container mx-auto flex justify-between items-center px-4">
+      <h1 class="text-2xl font-bold text-blue-500">Years, Segments/Dimensions & Countries</h1>
+      <!-- Elegant Navigation -->
+      <nav class="flex items-center space-x-4">
+        <a href="homepage.html" class="nav-button flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-full shadow-lg hover:from-blue-600 hover:to-purple-700">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+          </svg>
+          <span>Home</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Content Section -->
+  <main id="iframe-container">
+
+      <!-- Loader -->
+      <div id="loader">
+        <div class="spinner"></div>
+        <p class="loading-text">Loading data, kindly wait...</p>
+      </div>
+
+
+    <iframe 
+      src="http://localhost:8082" 
+      id="dash-iframe" 
+      allowfullscreen
+      onload="hideLoader()">
+    </iframe>
+  </main>
+
+  <footer class="bg-gray-100 py-6">
+    <div class="container mx-auto text-center">
+      <div class="mt-4 flex justify-center space-x-4">
+        <!--<a href="#" class="text-gray-600 hover:text-blue-500"><i class="fab fa-envelope"></i>Email</a>-->
+
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Hide loader once iframe has fully loaded
+    function hideLoader() {
+      const loader = document.getElementById("loader");
+      const iframe = document.getElementById("dash-iframe");
+
+      // Hide loader and show iframe
+      loader.style.display = "none";
+      iframe.style.display = "block";
+    }
+  </script>
+
+
+</body>
+</html>

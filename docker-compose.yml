@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  rs-review-app:
+    build: .
+    ports:
+      - "3000:3000"  # Frontend
+      - "8080:8080"  # Main Flask app
+      - "8081:8081"  # Interactive App 1
+      - "8082:8082"  # Interactive App 2
+      - "8083:8083"  # Segment Country
+      - "8084:8084"  # Segment Year
+      - "8085:8085"  # Continents Countries
+    environment:
+      - FLASK_ENV=production
+    restart: unless-stopped
+    volumes:
+      - ./data:/app/data:ro  # Mount data directory as read-only

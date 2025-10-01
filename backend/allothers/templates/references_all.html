@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All References - Recommender Systems Review</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .ref-item {
+      text-indent: -36pt;
+      margin-left: 36pt;
+      padding-left: 0;
+    }
+    
+    @media print {
+      body { font-size: 12pt; }
+      .no-print { display: none; }
+      .ref-item { margin-bottom: 12pt; }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans">
+  <!-- Floating Back to Top Button -->
+  <button id="backToTop" class="fixed bottom-8 right-8 bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg transition-all duration-300 opacity-0 invisible z-50">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+    </svg>
+  </button>
+
+  <div class="container mx-auto my-8 p-8 bg-white shadow-lg rounded-lg">
+    <!-- Header -->
+    <div class="text-center mb-8 border-b border-gray-200 pb-6">
+      <h1 class="text-3xl font-bold text-gray-800 mb-4">📚 Complete References</h1>
+      <p class="text-lg text-gray-600">Recommender Systems Systematic Review</p>
+      <p class="text-sm text-gray-500 mt-2">Total References: <span class="font-semibold">{{ total_count }}</span></p>
+    </div>
+
+    <!-- Control Panel -->
+    <div class="no-print flex justify-center space-x-4 mb-8">
+      <button onclick="window.print()" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg shadow-md transition-all">
+        🖨️ Print References
+      </button>
+      <button onclick="history.back()" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg shadow-md transition-all">
+        ← Back to References
+      </button>
+    </div>
+
+    <!-- References List -->
+    <div class="space-y-4 text-gray-700 text-sm leading-relaxed">
+      {% for reference in references %}
+        <div class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-all duration-200">
+          <div class="ref-item text-justify leading-relaxed">
+            <!-- Complete reference starting from the parenthesis with proper card coverage -->
+            {% if reference.url %}<a href="{{ reference.url }}" target="_blank" class="text-blue-600 font-bold hover:underline">({{ reference.ref_no }})</a>{% else %}<span class="text-gray-700 font-bold">({{ reference.ref_no }})</span>{% endif %} {{ reference.authors }} ({{ reference.year }}). <em>{{ reference.title }}</em>.{% if reference.journal %} <em>{{ reference.journal }}</em>.{% endif %}{% if reference.url %} <a href="{{ reference.url }}" target="_blank" class="text-blue-600 hover:underline">[View Paper]</a>{% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- Footer -->
+    <div class="mt-12 pt-6 border-t border-gray-200 text-center text-gray-500 text-sm">
+      <p>Generated on: {{ current_date }}</p>
+      <p class="no-print">This document contains all {{ total_count }} references from the systematic review.</p>
+    </div>
+  </div>
+
+  <script>
+    // Auto-focus for better user experience
+    document.addEventListener('DOMContentLoaded', function() {
+      // Smooth scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      
+      // Back to Top Button functionality
+      const backToTopButton = document.getElementById('backToTop');
+      
+      // Show/hide button based on scroll position
+      window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+          backToTopButton.classList.remove('opacity-0', 'invisible');
+          backToTopButton.classList.add('opacity-100', 'visible');
+        } else {
+          backToTopButton.classList.add('opacity-0', 'invisible');
+          backToTopButton.classList.remove('opacity-100', 'visible');
+        }
+      });
+      
+      // Smooth scroll to top when clicked
+      backToTopButton.addEventListener('click', function() {
+        window.scrollTo({ 
+          top: 0, 
+          behavior: 'smooth' 
+        });
+      });
+      
+      // Add keyboard shortcuts
+      document.addEventListener('keydown', function(e) {
+        if (e.ctrlKey && e.key === 'p') {
+          e.preventDefault();
+          window.print();
+        }
+        if (e.key === 'Escape') {
+          window.close();
+        }
+        // Add Home key to scroll to top
+        if (e.key === 'Home') {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

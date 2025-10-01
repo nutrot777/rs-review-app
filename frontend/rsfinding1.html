@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publication Classifications</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Navigation Styles */
+    .nav-button {
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+    
+    .nav-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Modal Styles */
+    #iframe-modal-container {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #iframe-modal {
+      width: 90%;
+      height: 90%;
+      border: none;
+      border-radius: 8px;
+      background: white;
+    }
+
+    #close-modal-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #e53e3e;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    /* Image */
+    #venn-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Responsive Grid Layout */
+    .grid-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr; /* Two columns */
+      gap: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .grid-container {
+        grid-template-columns: 1fr; /* Stack vertically on smaller screens */
+      }
+    }
+
+    /* Cards */
+    .card {
+      background-color: white;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: box-shadow 0.3s ease-in-out;
+    }
+
+    .card:hover {
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans">
+  <!-- Header -->
+  <header class="bg-white shadow-md py-4 mb-6">
+    <div class="container mx-auto flex justify-between items-center px-4">
+      <h1 class="text-2xl font-bold text-blue-500">Publication Classifications</h1>
+      <!-- Elegant Navigation -->
+      <nav class="flex items-center space-x-4">
+        <a href="homepage.html" class="nav-button flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-full shadow-lg hover:from-blue-600 hover:to-purple-700">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+          </svg>
+          <span>Home</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Grid Layout -->
+  <div class="container mx-auto grid-container px-4">
+    <!-- Left Side: Venn Diagram -->
+    <div class="flex justify-center items-center">
+      <img 
+        src="sources/Venn_diagram_classified_segment_PPT_main.png" 
+        alt="Venn Diagram of Classified Segments" 
+        id="venn-image"
+      />
+    </div>
+
+    <!-- Right Side: Cards -->
+    <div class="space-y-4">
+      <p class="text-gray-600 text-center mb-4">
+        Select a category to view detailed publications.
+      </p>
+      <div class="card" onclick="openModal('http://localhost:8080/unique-technology')">
+        <h2 class="text-lg font-semibold text-gray-800">Unique to Technology</h2>
+      </div>
+      <div class="card" onclick="openModal('http://localhost:8080/unique-process')">
+        <h2 class="text-lg font-semibold text-gray-800">Unique to Process</h2>
+      </div>
+      <div class="card" onclick="openModal('http://localhost:8080/unique-people')">
+        <h2 class="text-lg font-semibold text-gray-800">Unique to People</h2>
+      </div>
+      <div class="card" onclick="openModal('http://localhost:8080/all-three')">
+        <h2 class="text-lg font-semibold text-gray-800">All Three Segments</h2>
+      </div>
+      <div class="card" onclick="openModal('http://localhost:8080/people-process')">
+        <h2 class="text-lg font-semibold text-gray-800">People & Process</h2>
+      </div>
+      <div class="card" onclick="openModal('http://localhost:8080/people-technology')">
+        <h2 class="text-lg font-semibold text-gray-800">People & Technology</h2>
+      </div>
+      <div class="card" onclick="openModal('http://localhost:8080/process-technology')">
+        <h2 class="text-lg font-semibold text-gray-800">Process & Technology</h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Container -->
+  <div id="iframe-modal-container" class="flex">
+    <iframe id="iframe-modal"></iframe>
+    <button id="close-modal-btn" onclick="closeModal()">Close</button>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-100 py-6 mt-8">
+    <div class="container mx-auto text-center">
+      <p class="text-gray-600">© 2024</p>
+    </div>
+  </footer>
+
+  <!-- Modal Script -->
+  <script>
+    function openModal(url) {
+      const iframe = document.getElementById('iframe-modal');
+      const modalContainer = document.getElementById('iframe-modal-container');
+      
+      iframe.src = url; // Set the iframe URL
+      modalContainer.style.display = "flex"; // Show modal
+      document.body.style.overflow = "hidden"; // Disable scrolling
+    }
+
+    function closeModal() {
+      const iframe = document.getElementById('iframe-modal');
+      const modalContainer = document.getElementById('iframe-modal-container');
+      
+      iframe.src = ''; // Clear iframe
+      modalContainer.style.display = "none"; // Hide modal
+      document.body.style.overflow = "auto"; // Enable scrolling
+    }
+  </script>
+</body>
+</html>

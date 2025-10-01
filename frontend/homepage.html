@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recommender System Review Findings</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Elegant Card Animations */
+    .project-card {
+      transition: all 0.3s ease;
+      transform: translateY(0);
+    }
+    
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Header gradient */
+    .header-gradient {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    /* Floating animation */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    .float-animation {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    /* Elegant text gradient */
+    .gradient-text {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans">
+  <header class="bg-white shadow-md border-b-4 border-blue-500 py-6">
+    <div class="container mx-auto flex justify-between items-center px-4">
+      <div>
+        <h1 class="text-3xl font-bold text-gray-800 mb-1">Recommender Systems Research</h1>
+        <p class="text-gray-600 text-lg">Systematic Review Results & Findings</p>
+      </div>
+      <nav class="space-x-4">
+        <div class="bg-blue-50 border border-blue-200 rounded-lg px-6 py-3 text-blue-700 font-medium">
+          Interactive Dashboard
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-4 py-10">
+    <div class="text-center mb-10">
+      <h2 class="text-3xl font-bold text-gray-800 mb-4">Research Visualizations</h2>
+      <p class="text-gray-600 text-lg max-w-3xl mx-auto leading-relaxed">
+        This dashboard presents the comprehensive analysis of our systematic review on recommender systems. 
+        Each visualization below represents different aspects of the research findings, including geographic distribution, 
+        temporal trends, and thematic classifications.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Project Cards -->
+      <a href="countries.html" class="project-card block bg-white shadow-lg rounded-xl overflow-hidden mx-auto border border-gray-100">
+        <img src="./sources/country_by_publication_main.png" alt="Publications by Countries" class="w-full h-48 object-cover">
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-gray-800 mb-3">📍 Publications by Countries</h3>
+          <p class="text-gray-600 mb-4 leading-relaxed">Interactive chart showing open access publications by countries and continents. Explore the geographic distribution of recommender systems research.</p>
+          <span class="inline-flex items-center text-blue-600 font-medium group">
+            Explore Visualization 
+            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </span>
+        </div>
+      </a>
+
+      <a href="rsfinding1.html" class="project-card block bg-white shadow-lg rounded-xl overflow-hidden mx-auto border border-gray-100">
+        <img src="./sources/Venn_diagram_classified_segment_PPT_main.png" alt="Three-Way Venn Diagram" class="w-full h-48 object-cover">
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-gray-800 mb-3">🔄 Three-Way Venn Diagram</h3>
+          <p class="text-gray-600 mb-4 leading-relaxed">Visualizes the intersections between People, Process, and Technology dimensions in recommender systems research.</p>
+          <span class="inline-flex items-center text-blue-600 font-medium group">
+            View Analysis
+            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </span>
+        </div>
+      </a>
+
+      <a href="rsfinding2.html" class="block bg-white shadow-md rounded-lg overflow-hidden mx-auto">
+        <img src="./sources/card_image_project1.png" alt="Years & Countries" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <h3 class="text-xl font-semibold text-gray-800">Years & Countries</h3>
+          <p class="text-gray-600 mt-2">This visualises an interactive sunburst chart between the publication frequencies on the Years and Countries.</p>
+          <p class="text-gray-600 mt-2">Click on any segment to zoom into its subcategories. Use the center of the chart to navigate back to higher levels. Hover over segments to view details such as names and values</p>
+          <span class="text-blue-500 mt-4 inline-block">Visualise &rarr;</span>
+        </div>
+      </a>
+
+      <a href="rsfinding3.html" class="block bg-white shadow-md rounded-lg overflow-hidden mx-auto">
+        <img src="./sources/card_image_project2.png" alt="Segments&Countries" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <h3 class="text-xl font-semibold text-gray-800">Segments & Countries</h3>
+          <p class="text-gray-600 mt-2">This illustrates an interactive treemap chart between the dimensions/segments and the respective countries within which they can be found.</p>
+          <p class="text-gray-600 mt-2">Click on a rectangle to drill down into its subcategories. To navigate back, use the provided breadcrumb trail or navigation buttons. Hover over rectangles to see additional information like names and values.</p>
+          <span class="text-blue-500 mt-4 inline-block">Visualise &rarr;</span>
+        </div>
+      </a>
+
+      <a href="rsfinding4.html" class="block bg-white shadow-md rounded-lg overflow-hidden mx-auto">
+        <img src="./sources/card_image_project3.png" alt="Years&Dimensions" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <h3 class="text-xl font-semibold text-gray-800">Years & Segments</h3>
+          <p class="text-gray-600 mt-2">Illustrates a stack chart of the selected open-access publications within their respective dimensions across the years.</p>
+          <span class="text-blue-500 mt-4 inline-block">Visualise &rarr;</span>
+        </div>
+      </a>
+
+      <a href="rsfinding5.html" class="block bg-white shadow-md rounded-lg overflow-hidden mx-auto">
+        <img src="./sources/card_image_project4.png" alt="Years&Dimensions&Countries" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <h3 class="text-xl font-semibold text-gray-800">Years, Segments & Countries</h3>
+          <p class="text-gray-600 mt-2">Illustrates an interactive sunburst chart of publications within all three variables [Years, Dimensions, Countries] for continuous exploration.</p>
+          <p class="text-gray-600 mt-2">Click on any segment to zoom into its subcategories. Use the center of the chart to navigate back to higher levels. Hover over segments to view details such as names and values.</p>
+          <span class="text-blue-500 mt-4 inline-block">Visualise &rarr;</span>
+        </div>
+      </a>
+
+      <a href="themes_in_abstract.html" class="block bg-white shadow-md rounded-lg overflow-hidden mx-auto">
+        <img src="./sources/card_image_extracted_themes.png" alt="Years&Dimensions&Countries" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <h3 class="text-xl font-semibold text-gray-800">Themes From Abstract</h3>
+          <p class="text-gray-600 mt-2">The spreadsheet provides metadata on the 864 open-access publications as well as the extracted themes from the KeyBert analysis</p>
+          <span class="text-blue-500 mt-4 inline-block">Learn more &rarr;</span>
+        </div>
+      </a>
+
+      <a href="paperscitations.html" class="block bg-white shadow-md rounded-lg overflow-hidden mx-auto">
+        <img src="./sources/card_image_citation.png" alt="Venn-diagram" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <h3 class="text-xl font-semibold text-gray-800">List of Reviewed Papers</h3>
+          <p class="text-gray-600 mt-2">Citations of Selected Reveiw Papers can be found here.</p>
+          <span class="text-blue-500 mt-4 inline-block">Learn more &rarr;</span>
+        </div>
+      </a>
+    </div>
+  </main>
+
+  <footer class="bg-gray-100 py-6">
+    <div class="container mx-auto text-center">
+      <div class="mt-4 flex justify-center space-x-4">
+       <!--<a href="#" class="text-gray-600 hover:text-blue-500"><i class="fab fa-envelope"></i>Email</a>-->
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

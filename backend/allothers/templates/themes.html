@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Extracted Themes</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+  <div class="container mx-auto my-8 p-6 bg-white shadow-lg rounded-lg">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Extracted Themes</h2>
+
+    <!-- Table for Themes -->
+    <div class="overflow-x-auto">
+      <table class="table-auto w-full text-left border-collapse">
+        <thead>
+          <tr class="bg-gray-100">
+            <th class="px-4 py-2 border-b font-bold">Reference No</th>
+            <th class="px-4 py-2 border-b font-bold">Extracted Themes</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for row in themes_data %}
+            <tr>
+              <!-- Reference_no as clickable link -->
+              <td class="px-4 py-2 border-b">
+                {% if row['URL'] %}
+                  <a href="{{ row['URL'] }}" target="_blank" class="text-blue-500 hover:underline">
+                    {{ row['Reference_no'] }}
+                  </a>
+                {% else %}
+                  {{ row['Reference_no'] }}
+                {% endif %}
+              </td>
+              <!-- Extracted Themes column -->
+              <td class="px-4 py-2 border-b">{{ row['Extracted Themes'] }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+          
+      </table>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="flex justify-center items-center mt-6 space-x-2">
+        <!-- First and Previous -->
+        {% if page > 1 %}
+          <a href="?page=1" class="px-3 py-1 bg-gray-300 text-gray-800 rounded hover:bg-gray-400">« First</a>
+          <a href="?page={{ page - 1 }}" class="px-3 py-1 bg-gray-300 text-gray-800 rounded hover:bg-gray-400">‹ Previous</a>
+        {% endif %}
+      
+        <!-- Dynamic Page Numbers -->
+        {% for num in range(page - 3, page + 4) %}
+          {% if num > 0 and num <= total_pages %}
+            {% if num == page %}
+              <span class="px-3 py-1 bg-blue-500 text-white rounded">{{ num }}</span>
+            {% else %}
+              <a href="?page={{ num }}" class="px-3 py-1 bg-gray-300 text-gray-800 rounded hover:bg-gray-400">{{ num }}</a>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      
+        <!-- Next and Last -->
+        {% if page < total_pages %}
+          <a href="?page={{ page + 1 }}" class="px-3 py-1 bg-gray-300 text-gray-800 rounded hover:bg-gray-400">Next ›</a>
+          <a href="?page={{ total_pages }}" class="px-3 py-1 bg-gray-300 text-gray-800 rounded hover:bg-gray-400">Last »</a>
+        {% endif %}
+      </div>
+      
+  </div>
+</body>
+</html>

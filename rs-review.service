@@ -1,0 +1,14 @@
+[Unit]
+Description=RS Review Application
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/path/to/rs-review-app
+Environment=PATH=/path/to/rs-review-app/rs_review_env/bin
+ExecStart=/path/to/rs-review-app/rs_review_env/bin/python run_all.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
