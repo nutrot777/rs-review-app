@@ -7,7 +7,7 @@ build:
       - pip install -r requirements.txt
       - echo "Build completed"
 run:
-  runtime-version: python3.11
+  runtime-version: python311
   command: cd frontend && python app.py
   network:
     port: 8080
@@ -23,7 +23,7 @@ build:
       - pip install -r requirements.txt
       - echo "Build completed"
 run:
-  runtime-version: python3.11
+  runtime-version: python311
   command: python frontend_server.py
   network:
     port: 8080
