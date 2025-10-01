@@ -10,7 +10,7 @@ run:
     - pip3 install pipenv
     - pipenv install
     - echo "Dependencies installed with pipenv"
-  command: pipenv run python3 -u backend/allothers/app.py
+  command: pipenv run python3 -u backend/continentsCountries/app.py
   network:
     port: 8080
   env:
