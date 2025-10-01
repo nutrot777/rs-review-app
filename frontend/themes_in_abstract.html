@@ -113,7 +113,7 @@
 
 
     <iframe 
-      src="http://localhost:8080/themes" 
+      src="https://rs-review-main.onrender.com/themes" 
       id="dash-iframe" 
       allowfullscreen
       onload="hideLoader()">
@@ -149,7 +149,7 @@
         button.disabled = true;
 
         // Make request to backend for download
-        const response = await fetch(`http://localhost:8080/download/${format}`);
+        const response = await fetch(`https://rs-review-main.onrender.com/download/${format}`);
         
         if (!response.ok) {
           throw new Error('Download failed');

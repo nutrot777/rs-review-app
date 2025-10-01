@@ -210,7 +210,7 @@
 
 
     <iframe 
-      src="http://localhost:8080/references" 
+      src="https://rs-review-main.onrender.com/references" 
       id="dash-iframe" 
       allowfullscreen
       onload="hideLoader()">
@@ -239,7 +239,7 @@
     // View all references in a new window/tab
     function viewAllReferences() {
       // Navigate to all references in the same tab
-      window.location.href = 'http://localhost:8080/references?view_all=true';
+      window.location.href = 'https://rs-review-main.onrender.com/references?view_all=true';
     }
 
     // Download references in different formats
@@ -253,7 +253,7 @@
         button.disabled = true;
 
         // Make request to backend for download
-        const response = await fetch(`http://localhost:8080/download/${format}`);
+        const response = await fetch(`https://rs-review-main.onrender.com/download/${format}`);
         
         if (!response.ok) {
           throw new Error('Download failed');
