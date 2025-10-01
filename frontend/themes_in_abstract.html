@@ -173,7 +173,7 @@
         button.innerHTML = `⏳ Preparing ${format.toUpperCase()}... ${countdown}s`;
 
         // Make request to backend for download
-        const response = await fetch(`https://wjyib6gdg3.us-east-1.awsapprunner.com/download/${format}`);
+        const response = await fetch(`https://wjyib6gdg3.us-east-1.awsapprunner.com/download/references/${format}`);
         
         // Clear the countdown timer
         clearInterval(countdownInterval);
