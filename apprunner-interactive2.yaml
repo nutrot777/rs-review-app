@@ -27,7 +27,6 @@ run:
   command: cd backend/interactiveApp2 && python app.py
   network:
     port: 8080
-    bind: '0.0.0.0'
   env:
     - name: PORT
       value: 8080
