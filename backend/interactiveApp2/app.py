@@ -207,5 +207,6 @@ def display_modal(click_data, close_clicks, is_open):
 # Run the app
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8080))
-    debug_mode = os.environ.get("RENDER") is None  # Only debug in local development
+    # Only debug in local development (not in production)
+    debug_mode = not (os.environ.get("RENDER") or os.environ.get("AWS_DEPLOYMENT"))
     app.run(debug=debug_mode, host="0.0.0.0", port=port)
