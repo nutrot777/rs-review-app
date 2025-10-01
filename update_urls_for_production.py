@@ -8,7 +8,7 @@ import os
 import re
 from pathlib import Path
 
-# Production URLs (these will be the actual Render service URLs)
+# Production URLs (actual Render service URLs)
 PRODUCTION_URLS = {
     'http://localhost:8080': 'https://rs-review-main.onrender.com',
     'http://localhost:8081': 'https://rs-review-interactive1.onrender.com', 

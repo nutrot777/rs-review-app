@@ -77,9 +77,15 @@ services:
       - key: RENDER
         value: true
 
-  # Static Frontend (using web service to serve static files)
+  # Frontend Server (serving static HTML files)
   - type: web
     name: rs-review-frontend
-    env: static
-    staticPublishPath: frontend
-    buildCommand: python update_urls_for_production.py
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python frontend_server.py
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: RENDER
+        value: true
