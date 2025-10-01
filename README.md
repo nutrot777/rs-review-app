@@ -254,4 +254,13 @@ This is a research project. For questions or collaboration opportunities, please
 
 ---
 
+aws url for services:
+main service - https://wjyib6gdg3.us-east-1.awsapprunner.com
+Interactive1 - https://xfnhmjtnpu.us-east-1.awsapprunner.com
+Interactive2 - https://dpq2ezqm35.us-east-1.awsapprunner.com
+SegmentCountry - https://s75wimprp2.us-east-1.awsapprunner.com
+SegmentYear - https://wx2jdw33e8.us-east-1.awsapprunner.com
+Continents - https://vxemm5xtpf.us-east-1.awsapprunner.com
+Frontend - https://7ybxm9q37x.us-east-1.awsapprunner.com
+
 **🎉 Enjoy exploring the recommender systems research landscape!**
