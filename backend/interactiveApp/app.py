@@ -76,6 +76,9 @@ fig.update_layout(
 # Initialize Dash app
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
+# Expose the Flask server for Gunicorn (this is automatically available in Dash)
+server = app.server
+
 # App layout
 app.layout = dbc.Container(
     [
