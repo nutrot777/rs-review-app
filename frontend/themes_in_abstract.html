@@ -139,21 +139,51 @@
       iframe.style.display = "block";
     }
 
-    // Download references in different formats
+    // Download references in different formats with countdown timer
     async function downloadReferences(format) {
+      const button = event.target;
+      const originalText = button.innerHTML;
+      
+      // Estimated download times for different formats (in seconds)
+      const estimatedTimes = {
+        'txt': 8,    // Fastest - simple text format
+        'pdf': 15,   // Medium - needs PDF generation
+        'word': 20   // Slowest - complex Word document generation
+      };
+      
+      const estimatedTime = estimatedTimes[format] || 15;
+      let countdown = estimatedTime;
+      let countdownInterval;
+      
       try {
-        // Show loading indicator
-        const button = event.target;
-        const originalText = button.innerHTML;
-        button.innerHTML = '⏳ Downloading...';
+        // Disable button
         button.disabled = true;
+        
+        // Start countdown timer
+        countdownInterval = setInterval(() => {
+          if (countdown > 0) {
+            button.innerHTML = `⏳ Preparing ${format.toUpperCase()}... ${countdown}s`;
+            countdown--;
+          } else {
+            button.innerHTML = '📄 Generating file...';
+          }
+        }, 1000);
+        
+        // Initial countdown display
+        button.innerHTML = `⏳ Preparing ${format.toUpperCase()}... ${countdown}s`;
 
         // Make request to backend for download
         const response = await fetch(`https://rs-review-main.onrender.com/download/${format}`);
         
+        // Clear the countdown timer
+        clearInterval(countdownInterval);
+        
         if (!response.ok) {
           throw new Error('Download failed');
         }
+
+        // Update to processing state
+        button.innerHTML = '📥 Processing download...';
 
         // Get the blob and create download
         const blob = await response.blob();
@@ -176,16 +206,36 @@
         window.URL.revokeObjectURL(url);
         document.body.removeChild(a);
 
-        // Success message
-        showNotification(`📥 ${format.toUpperCase()} download completed!`, 'success');
+        // Success message with file size
+        const fileSizeMB = (blob.size / (1024 * 1024)).toFixed(1);
+        showNotification(`✅ ${format.toUpperCase()} download completed! (${fileSizeMB}MB)`, 'success');
+        button.innerHTML = `✅ Downloaded!`;
 
       } catch (error) {
         console.error('Download error:', error);
-        showNotification(`❌ Download failed. Please try again.`, 'error');
+        
+        // Clear countdown timer on error
+        if (countdownInterval) {
+          clearInterval(countdownInterval);
+        }
+        
+        // User-friendly error message
+        let errorMessage = 'Download failed. ';
+        if (error.message.includes('Failed to fetch')) {
+          errorMessage += 'The server might be starting up. Please wait 30 seconds and try again.';
+        } else {
+          errorMessage += 'Please try again in a moment.';
+        }
+        
+        showNotification(`❌ ${errorMessage}`, 'error');
+        button.innerHTML = '❌ Failed';
+        
       } finally {
-        // Reset button
-        button.innerHTML = originalText;
-        button.disabled = false;
+        // Reset button after delay
+        setTimeout(() => {
+          button.innerHTML = originalText;
+          button.disabled = false;
+        }, 3000);
       }
     }
 
