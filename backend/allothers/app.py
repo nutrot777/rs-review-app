@@ -249,7 +249,7 @@ def references():
         )
 
 
-@app.route('/download/<format_type>')
+@app.route('/download/references/<format_type>')
 def download_references(format_type):
     """
     Route to download all references in different formats (PDF, Word, TXT).
