@@ -7,8 +7,10 @@ build:
 run:
   runtime-version: 3.11
   pre-run:
-    - pip3 install -r requirements.txt
-  command: cd backend/allothers && python3 app.py
+    - pip3 install pipenv
+    - pipenv install
+    - echo "Dependencies installed with pipenv"
+  command: pipenv run python3 -u backend/allothers/app.py
   network:
     port: 8080
   env:
