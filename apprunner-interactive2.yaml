@@ -1,49 +1,15 @@
-version: 1.0version: 1.0
-
-runtime: python311runtime: python311
-
-build:build:
-
-  commands:  commands:
-
-    build:    build:
-
-      - echo "Build completed"      - echo "Installing dependencies"
-
-run:      - echo "Build completed"
-
-  runtime-version: 3.11run:
-
-  pre-run:  pre-run:
-
-    - pip3 install -r requirements.txt    - pip3 install -r requirements.txt
-
-  command: cd backend/interactive2 && python3 app.py  runtime-version: 3.11
-
-  network:  command: cd backend/interactive2 && python3 app.py
-
-    port: 8080  network:
-
-  env:    port: 8080
-
-    - name: PORT  env:
-
-      value: 8080    - name: PORT
-
-    - name: AWS_DEPLOYMENT      value: 8080
-
-      value: true    - name: AWS_DEPLOYMENT
-      value: truee: python3
+version: 1.0
+runtime: python311
 build:
   commands:
     build:
-      - echo "Installing dependencies"
       - echo "Build completed"
 run:
-  pre-run:
-    - pip3 install -r requirements.txt
   runtime-version: 3.11
-  command: cd backend/interactiveApp2 && python3 app.py
+  pre-run:
+    - pip3 install pipenv
+    - pipenv install
+  command: pipenv run python3 -u backend/interactiveApp2/app.py
   network:
     port: 8080
   env:

@@ -7,8 +7,9 @@ build:
 run:
   runtime-version: 3.11
   pre-run:
-    - pip3 install -r requirements.txt
-  command: cd backend/segmentyear && python3 app.py
+    - pip3 install pipenv
+    - pipenv install
+  command: pipenv run python3 -u backend/segmentyear/app.py
   network:
     port: 8080
   env:
