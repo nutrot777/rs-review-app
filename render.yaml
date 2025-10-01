@@ -77,8 +77,9 @@ services:
       - key: RENDER
         value: true
 
-  # Static Frontend
-  - type: static
+  # Static Frontend (using web service to serve static files)
+  - type: web
     name: rs-review-frontend
+    env: static
     staticPublishPath: frontend
     buildCommand: python update_urls_for_production.py
