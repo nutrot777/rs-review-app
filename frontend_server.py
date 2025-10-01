@@ -22,6 +22,12 @@ def update_urls():
 class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory='frontend', **kwargs)
+    
+    def do_GET(self):
+        # If requesting root, serve homepage.html
+        if self.path == '/' or self.path == '':
+            self.path = '/homepage.html'
+        super().do_GET()
 
 if __name__ == "__main__":
     # Update URLs first
